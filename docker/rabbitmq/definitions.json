@@ -1,0 +1,82 @@
+{
+  "rabbit_version": "3.12.0",
+  "users": [
+    {
+      "name": "admin",
+      "password_hash": "2D3Rnd996XG/8e54s3A++Jm6sR2Lms+R2d/=",
+      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "tags": ["administrator"]
+    }
+  ],
+  "vhosts": [
+    {
+      "name": "/"
+    }
+  ],
+  "permissions": [
+    {
+      "user": "admin",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    }
+  ],
+  "queues": [
+    {
+      "name": "recordatorios.envio",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-dead-letter-exchange": "dlx.recordatorios",
+        "x-dead-letter-routing-key": "recordatorios.failed"
+      }
+    },
+    {
+      "name": "recordatorios.dlq",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    }
+  ],
+  "exchanges": [
+    {
+      "name": "notifications.direct",
+      "vhost": "/",
+      "type": "direct",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    },
+    {
+      "name": "dlx.recordatorios",
+      "vhost": "/",
+      "type": "direct",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    }
+  ],
+  "bindings": [
+    {
+      "source": "notifications.direct",
+      "vhost": "/",
+      "destination": "recordatorios.envio",
+      "destination_type": "queue",
+      "routing_key": "recordatorio.send",
+      "arguments": {}
+    },
+    {
+      "source": "dlx.recordatorios",
+      "vhost": "/",
+      "destination": "recordatorios.dlq",
+      "destination_type": "queue",
+      "routing_key": "recordatorios.failed",
+      "arguments": {}
+    }
+  ]
+}

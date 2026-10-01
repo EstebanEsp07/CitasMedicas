@@ -1,0 +1,33 @@
+{
+  "name": "Citas Medicas Dev Environment",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "java.configuration.runtimes": [
+          {
+            "name": "JavaSE-17",
+            "path": "/usr/lib/jvm/java-17-openjdk-amd64",
+            "default": true
+          }
+        ],
+        "editor.formatOnSave": true
+      },
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "ms-python.python",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "eamodio.gitlens",
+        "ckvr.angular-snippet"
+      ]
+    }
+  },
+  "remoteUser": "vscode",
+  "forwardPorts": [8080, 5432, 5672, 15672, 5173]
+}
