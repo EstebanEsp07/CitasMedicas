@@ -3,9 +3,9 @@
   "users": [
     {
       "name": "admin",
-      "password_hash": "2D3Rnd996XG/8e54s3A++Jm6sR2Lms+R2d/=",
+      "password_hash": "pd+EURtC/bH1sEP4Y+pK+OX08ctNeuEeWzQeZAwNvaoz1FH5",
       "hashing_algorithm": "rabbit_password_hashing_sha256",
-      "tags": ["administrator"]
+      "tags": "administrator"
     }
   ],
   "vhosts": [
